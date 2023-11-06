@@ -43,8 +43,8 @@ function App() {
             />
           )}
 
-          <div className="absolute bottom-0 z-5 mx-auto w-full flex justify-center">
-            <strong className="text-black text-center text-xl">Photo</strong>
+          <div className="absolute bottom-0 z-5 w-11/12 flex justify-center">
+            <strong className="text-black text-xl">Photo</strong>
           </div>
         </section>
       </article>
