@@ -29,7 +29,7 @@ function App() {
   return (
     <main className="text-white h-screen w-screen flex justify-center items-center flex-col">
       <h1 className="text-3xl text-center underline font-semibold">Cats app</h1>
-      <article className="p-2 bg-slate-500 flex m-3 gap-2 max-w-2xl max-h-80 max-sm:flex-col max-sm:items-center max-sm:max-h-fit">
+      <article className="p-2 bg-slate-500 flex m-3 gap-2 max-w-2xl max-h-80 max-sm:flex-col max-sm:rounded-md max-sm:p-3 max-sm:items-center max-sm:max-h-fit">
         <section className="flex flex-col justify-center max-w-md">
           <h2 className="text-2xl capitalize">Interesting fact</h2>
           {fact && <p className="max-sm:text-sm">{fact}</p>}
@@ -51,7 +51,7 @@ function App() {
 
       <footer className="flex justify-center">
         <button
-          className="bg-sky-600 text-white capitalize py-1 px-3 rounded-md hover:bg-sky-500 hover:text-gray-200"
+          className="bg-sky-600 text-white capitalize py-1 px-3 rounded-md hover:bg-sky-500 hover:text-gray-200 outline-none"
           onClick={() => setReloadButton(!reloadButton)}
         >
           other data
