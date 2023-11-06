@@ -32,7 +32,7 @@ function App() {
       <article className="p-2 bg-slate-500 flex m-3 gap-2 max-w-2xl max-h-80 max-sm:flex-col max-sm:rounded-md max-sm:p-3 max-sm:items-center max-sm:max-h-fit">
         <section className="flex flex-col justify-center max-w-md">
           <h2 className="text-2xl capitalize">Interesting fact</h2>
-          {fact && <p className="max-sm:text-sm">{fact}</p>}
+          {fact && <p className="max-sm:text-md">{fact}</p>}
         </section>
         <section className=" bg-white relative h-72 w-60 p-2 max-sm: h-52">
           {imageUrl && (
