@@ -28,7 +28,15 @@ function App() {
       });
   }, [reloadButton]);
 
-  function handleRandom() {}
+  const handleRandom = () => {
+    let newColor;
+    do {
+      const logicRandom = Math.floor(Math.random() * RandomColor.length);
+      newColor = RandomColor[logicRandom].color;
+    } while (newColor === bgColorChanged);
+
+    setBgColorChanged(newColor);
+  };
 
   return (
     <main className="text-white h-screen w-screen flex justify-center items-center flex-col">
@@ -60,11 +68,7 @@ function App() {
           className="bg-sky-600 text-white capitalize py-1 px-3 rounded-md hover:bg-sky-500 hover:text-gray-200 outline-none"
           onClick={() => {
             setReloadButton(!reloadButton);
-
-            // TODO: logicRandom shouldn't repeat the same color in the next turn
-            const logicRandom = Math.round(Math.random() * RandomColor.length);
-            const { color } = RandomColor[logicRandom];
-            setBgColorChanged(color);
+            handleRandom();
           }}
         >
           other data
