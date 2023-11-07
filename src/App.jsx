@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import RandomColor from "./colors.js";
+import randomColor from "./colors.js";
 
 const CAT_ENDPOINT_RANDOM_FACT = "https://catfact.ninja/fact";
 const CAT_ENDPOINT_RANDOM_IMAGE = "https://api.thecatapi.com/v1/images/search";
@@ -26,15 +28,21 @@ function App() {
       });
   }, [reloadButton]);
 
+  function handleRandom() {
+    console.log(RandomColor);
+  }
+
   return (
     <main className="text-white h-screen w-screen flex justify-center items-center flex-col">
       <h1 className="text-3xl text-center underline font-semibold">Cats app</h1>
-      <article className="p-2 bg-slate-500 flex m-3 gap-2 max-w-2xl max-h-80 max-sm:flex-col max-sm:rounded-md max-sm:p-3 max-sm:items-center max-sm:max-h-fit">
+      <article
+        className={`bg-gray-800 p-2 flex m-3 gap-2 max-w-2xl max-h-80 rounded-md max-sm:flex-col max-sm:p-3 max-sm:items-center max-sm:max-h-fit`}
+      >
         <section className="flex flex-col justify-center max-w-md">
           <h2 className="text-2xl capitalize">Interesting fact</h2>
           {fact && <p>{fact}</p>}
         </section>
-        <section className=" bg-white relative h-72 w-60 p-2 max-sm: h-52">
+        <section className="bg-white relative h-72 w-60 p-2 max-sm:h-52">
           {imageUrl && (
             <img
               src={imageUrl}
@@ -55,6 +63,12 @@ function App() {
           onClick={() => setReloadButton(!reloadButton)}
         >
           other data
+        </button>
+        <button
+          className="mx-5 px-4 py-1 rounded-md bg-zinc-400"
+          onClick={handleRandom}
+        >
+          Test
         </button>
       </footer>
     </main>
