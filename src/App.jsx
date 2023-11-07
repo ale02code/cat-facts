@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import RandomColor from "./colors.js";
-import randomColor from "./colors.js";
 
 const CAT_ENDPOINT_RANDOM_FACT = "https://catfact.ninja/fact";
 const CAT_ENDPOINT_RANDOM_IMAGE = "https://api.thecatapi.com/v1/images/search";
@@ -9,6 +8,7 @@ function App() {
   const [fact, setFact] = useState();
   const [imageUrl, setImageUrl] = useState();
   const [reloadButton, setReloadButton] = useState(false);
+  const [bgColorChanged, setBgColorChanged] = useState("bg-sky-600");
 
   useEffect(() => {
     fetch(CAT_ENDPOINT_RANDOM_FACT)
@@ -28,15 +28,13 @@ function App() {
       });
   }, [reloadButton]);
 
-  function handleRandom() {
-    console.log(RandomColor);
-  }
+  function handleRandom() {}
 
   return (
     <main className="text-white h-screen w-screen flex justify-center items-center flex-col">
       <h1 className="text-3xl text-center underline font-semibold">Cats app</h1>
       <article
-        className={`bg-gray-800 p-2 flex m-3 gap-2 max-w-2xl max-h-80 rounded-md max-sm:flex-col max-sm:p-3 max-sm:items-center max-sm:max-h-fit`}
+        className={`${bgColorChanged} p-2 flex m-3 gap-2 max-w-2xl max-h-80 rounded-md max-sm:flex-col max-sm:p-3 max-sm:items-center max-sm:max-h-fit`}
       >
         <section className="flex flex-col justify-center max-w-md">
           <h2 className="text-2xl capitalize">Interesting fact</h2>
@@ -60,15 +58,16 @@ function App() {
       <footer className="flex justify-center">
         <button
           className="bg-sky-600 text-white capitalize py-1 px-3 rounded-md hover:bg-sky-500 hover:text-gray-200 outline-none"
-          onClick={() => setReloadButton(!reloadButton)}
+          onClick={() => {
+            setReloadButton(!reloadButton);
+
+            // TODO: logicRandom shouldn't repeat the same color in the next turn
+            const logicRandom = Math.round(Math.random() * RandomColor.length);
+            const { color } = RandomColor[logicRandom];
+            setBgColorChanged(color);
+          }}
         >
           other data
-        </button>
-        <button
-          className="mx-5 px-4 py-1 rounded-md bg-zinc-400"
-          onClick={handleRandom}
-        >
-          Test
         </button>
       </footer>
     </main>
