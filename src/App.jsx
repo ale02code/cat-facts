@@ -1,38 +1,23 @@
-import { useEffect, useState } from "react";
-import RandomColor from "./colors.js";
-
-const CAT_ENDPOINT_RANDOM_FACT = "https://catfact.ninja/fact";
-const CAT_ENDPOINT_RANDOM_IMAGE = "https://api.thecatapi.com/v1/images/search";
+import { useState } from "react";
+import { useCatImage } from "./hooks/useCatImage.js";
+import { useCatFact } from "./hooks/useCatFact.js";
+import colorRandom from "./colors.js";
 
 function App() {
-  const [fact, setFact] = useState();
-  const [imageUrl, setImageUrl] = useState();
   const [reloadButton, setReloadButton] = useState(false);
+  const { fact } = useCatFact({ reloadButton });
+  const { imageUrl } = useCatImage({ fact });
   const [bgColorChanged, setBgColorChanged] = useState("bg-sky-600");
 
-  useEffect(() => {
-    fetch(CAT_ENDPOINT_RANDOM_FACT)
-      .then((res) => res.json())
-      .then((data) => {
-        const { fact } = data;
-        setFact(fact);
-      });
-  }, [reloadButton]);
-
-  useEffect(() => {
-    fetch(CAT_ENDPOINT_RANDOM_IMAGE)
-      .then((res) => res.json())
-      .then((data) => {
-        const [{ url }] = data;
-        setImageUrl(url);
-      });
-  }, [reloadButton]);
-
   const handleRandom = () => {
+    // change button state
+    setReloadButton(!reloadButton);
+
+    // function to get a color random
     let newColor;
     do {
-      const logicRandom = Math.floor(Math.random() * RandomColor.length);
-      newColor = RandomColor[logicRandom].color;
+      const logicRandom = Math.floor(Math.random() * colorRandom.length);
+      newColor = colorRandom[logicRandom].color;
     } while (newColor === bgColorChanged);
 
     setBgColorChanged(newColor);
@@ -67,7 +52,6 @@ function App() {
         <button
           className="bg-sky-600 text-white capitalize py-1 px-3 rounded-md hover:bg-sky-500 hover:text-gray-200 outline-none"
           onClick={() => {
-            setReloadButton(!reloadButton);
             handleRandom();
           }}
         >
