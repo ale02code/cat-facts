@@ -6,11 +6,16 @@ export function useCatFact({ reloadButton }) {
 
   useEffect(() => {
     fetch(CAT_ENDPOINT_RANDOM_FACT)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
       .then((data) => {
         const { fact } = data;
         setFact(fact);
-      });
+      }).catch((error) => console.log(error))
   }, [reloadButton]);
 
   return { fact };
